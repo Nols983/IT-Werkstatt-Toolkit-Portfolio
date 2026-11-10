@@ -1,0 +1,50 @@
+NOLS IT TOOLKIT v2.1 - ERWEITERTE FEHLERAUSWERTUNG
+==================================================
+
+UPDATE fuer installiertes v2.0. Betrifft nur die neue Fehleranalyse.
+
+Verwendung
+- Recovery-Hauptmenue -> [A] FEHLERANALYSE -> Fehlerbild waehlen.
+- Einmal Windows-Laufwerk waehlen, Y/N zur dauerhaften Logspeicherung.
+- Nach der Schnellpruefung wird der Analysebericht automatisch angezeigt.
+- Untermenue -> [A] Analysebericht aktualisieren.
+
+Vorgehen
+- Liest Windows-System- und WindowsUpdateClient-Operational.evtx OFFLINE
+  mittels wevtutil /lf:true, wenn in WinPE verfuegbar.
+- Liest max. 80 passende System- und 100 passende Updateereignisse.
+- Bewertet nur Kombinationen aus richtiger EREIGNISQUELLE und ID:
+  Microsoft-Windows-Kernel-Power + 41 = unerwarteter Neustart
+  EventLog + 6008 = unerwartetes Herunterfahren
+  Microsoft-Windows-WER-SystemErrorReporting/BugCheck + 1001 = Bugcheck-Hinweis
+  Microsoft-Windows-WindowsUpdateClient + 20 = fehlgeschlagene Installation
+  Microsoft-Windows-WindowsUpdateClient + 19 = erfolgreiche Installation
+  Microsoft-Windows-WindowsUpdateClient + 41 != Kernel-Power!
+- Prueft ausserdem die Existenz wesentlicher Windows-Dateien und
+  vorhandener Minidump- bzw. MEMORY.DMP-Dateien.
+- Gibt [BEFUND], [HINWEIS] und [OFFEN] mit konkreten Folgeschritten aus.
+
+Protokollierung
+Y: Im bestehenden FEHLERANALYSE_* Ordner entstehen:
+   21_Systemevents_Auswertung.txt
+   42_UpdateEvents_Auswertung.txt
+   95_Analysebericht.txt
+N: Arbeitsdateien werden nur in einem neu erzeugten Unterordner des
+   WinPE-TEMP-Verzeichnisses angelegt und nach Auswertung entfernt.
+   Kein zusaetzlicher dauerhafter Toolkit-Log auf deiner T9.
+
+Hinweise
+- Keine Reparaturen, keine BCD-Aenderungen, keine Schreibzugriffe auf
+  die Offline-Ereignisdateien. Windows-Werkzeuge koennen eigene
+  temporäre Dateien erzeugen.
+- Reports basieren auf begrenzten Stichproben, keine vollstaendige
+  Forensik, weder Kausalitaet noch grundsaetzliche Systemgesundheit.
+- Event-ID alleine ist nie ausreichend.
+- Wenn wevtutil fehlt, ist die Auswertung unbekannt und nicht OK.
+- Die Auswertung von CHKDSK/DISM/SFC-Ausgaben wird bewusst NICHT
+  anhand einfacher Exitcodes als 'gesund' interpretiert.
+- Das Update aendert keine Boot-/DISM-/SFC-/CHKDSK-Reparaturmodule.
+
+Teststatus: Testdatenanalyse + Archiv + Installer statisch und
+per simuliertem Mountpoint geprueft. Echte Ausfuehrung unter
+WindowsPE/RE muss weiterhin getestet werden.

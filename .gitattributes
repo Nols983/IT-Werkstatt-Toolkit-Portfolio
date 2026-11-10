@@ -1,0 +1,6 @@
+# Preserve verified Windows/WinPE source bytes, including CP850 and CRLF.
+# Otherwise Git's automatic newline conversion can corrupt CMD output.
+/toolkit/** -text
+*.md text eol=lf
+*.yml text eol=lf
+*.py text eol=lf

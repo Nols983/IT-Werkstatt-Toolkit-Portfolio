@@ -1,0 +1,59 @@
+NOLS IT TOOLKIT v1.8 - UEFI-BOOT-LEITFADEN
+===============================================================
+
+WICHTIG: KEINE AUTOMATISCHE AUSWAHL DER EFI-PARTITION!
+Windows-Reparatur Åber den USB-Stick kann sonst Ventoy beschÑdigen.
+Die Windows- und EFI-Partition kînnen unterschiedliche Buchstaben haben.
+
+1. In Windows-Setup-CMD mit DiskPart prÅfen:
+   diskpart
+   list disk
+   list volume
+   select disk <NR_DES_WINDOWS_DATENTRAEGERS>
+   list partition
+   select partition <NR_DER_ESP>
+   detail partition
+
+   GPT-ESP-Typ sollte sein:
+   C12A7328-F81F-11D2-BA4B-00A0C93EC93B
+
+2. Wenn die korrekt identifizierte EFI-Systempartition KEINEN
+   Buchstaben hat, diesen NUR dort temporÑr vergeben:
+   assign letter=S
+   exit
+   (S ist nur ein Beispiel. VerfÅgbarkeit vorher prÅfen.)
+
+3. In NOLS zuerst Bootdiagnose aufrufen. Offline-BCD befindet
+   sich fÅr UEFI normalerweise unter:
+   S:\EFI\Microsoft\Boot\BCD
+
+4. FÅr gezielte Reparatur: Boot-Werkzeuge -> UEFI-Bootdateien.
+   Windows-Laufwerk einmal, EFI-Laufwerk einmal auswÑhlen.
+   Vorhandener BCD-Store wird auf USB gesichert und kontrolliert.
+
+5. Verwendeter Reparaturbefehl (nur nach Y-BestÑtigung):
+   bcdboot W:\Windows /s S: /f UEFI
+
+   W und S sind Beispiele. Der Befehl kann EFI-Dateien/BCD Ñndern.
+   Durch /s wird KEIN neuer UEFI-NVRAM-Eintrag erstellt. Deshalb
+   muss ggf. der Windows Boot Manager im UEFI-BootmenÅ ÅberprÅft
+   werden. Das Tool setzt KEINE BootprioritÑt automatisch.
+
+6. NICHT verwendet: format, clean, active, bootrec /fixmbr,
+   bootrec /fixboot, bcdedit /import, mountvol /S.
+   Keine automatische Reparatur von Legacy-BIOS/MBR.
+
+7. Wenn mehrere Betriebssysteme vorhanden sind, vorher alle
+   Boot-EintrÑge dokumentieren. BCDBoot kann EintrÑge Ñndern.
+
+8. Bei BitLocker: Recovery-Key bereithalten und Ziel entschlÅsselt
+   zugÑnglich machen. Bei Laufwerksdefekt zuerst Daten/Image sichern.
+
+9. Die BCD-Datei wird als Rohdatei gesichert. Nicht direkt mit
+   "bcdedit /import" wiederherstellen: das arbeitet auf dem
+   SYSTEM-Store und kann im WinPE den falschen Store betreffen.
+   Wiederherstellung nur gezielt nach manuellem Check.
+
+Microsoft:
+https://learn.microsoft.com/de-de/windows-hardware/manufacture/desktop/bcdboot-command-line-options-techref-di
+https://learn.microsoft.com/de-de/windows-hardware/manufacture/desktop/bcdedit-command-line-options

@@ -1,0 +1,43 @@
+NOLS v2.3 + v2.4 | Diagnose-Erweiterung für WinPE/WindowsRE
+===========================================================
+
+Installation: Updates für bereits installierte v2.2.1.
+Hauptmenü: [D] SPEICHERANALYSE und [B] BSOD / TREIBER.
+Fehleranalyse: [D] SPEICHERANALYSE und [T] BSOD / TREIBER.
+
+v2.3 - DATENTRAEGER / I/O
+- Zeigt DiskPart list disk/list volume, optional detail disk (nur lesen).
+- Fragt einmal das Windows-Volume ab, sofern nicht aus der Fehleranalyse aufgerufen.
+- Queried Offline-System.evtx via wevtutil fuer Disk, Controller, NTFS und WHEA.
+- Pro Gruppe ALL: maximal 80 neueste, 7D/30D: jeweils nur Existenzpruefung.
+- Zeitfenster werden relativ zur kontrollierten aktuellen WinPE-Uhr berechnet.
+- Gemeinsames 7-/30-Tage-Fenster bedeutet NICHT gemeinsame Ursache.
+- Das Tool verknuepft Windows Event-DeviceID und DiskPart-Datentraeger nicht automatisch.
+
+v2.4 - BSOD/TREIBER
+- Erfasst Minidump- und MEMORY.DMP-Fundstellen (Inhalte NICHT selbst analysiert).
+- Offline BugCheck 1001, Kernel-PnP 219, SCM 7000/7023/7031/7034.
+- Offline-Drittanbietertreiber ueber DISM /Get-Drivers; optional oemNN.inf-Details.
+- Keine Treiber werden entfernt, deaktiviert oder installiert.
+- Ein angezeigter Treiber ist KEIN Beweis fuer die Absturzursache.
+- Fuer eine echte Dumpanalyse WinDbg/CDB auf normalem Windows mit passendem Symbolpfad.
+
+LOGS UND NACHBEARBEITUNG
+- Logs Y: getrennte Unterordner; aus der Fehleranalyse Unterordner im Fallordner.
+- Logs N: temporaere Dateien in WinPE, geloescht nach der Anzeige.
+- Bestehende Logs und Repair-Backups werden NICHT veraendert.
+- Optional auf Bazzite/Ubuntu: exakte Zeitkorrelation / Bugcheck-Ereignisse aus XML:
+  Befehle aus dem Stammverzeichnis der Ventoy-Datenpartition ausfuehren:
+  python3 NOLS-Toolkit/Recovery/Analyse/offline_analyse.py \
+      "NOLS-Toolkit/Recovery/Logs/<FALL>/v23_Speicher" --mode storage
+  oder:
+  python3 NOLS-Toolkit/Recovery/Analyse/offline_analyse.py \
+      "NOLS-Toolkit/Recovery/Logs/<FALL>/v24_BSOD_Treiber" --mode bsod
+
+GRENZEN
+- WinPE erlaubt moeglicherweise nicht alle Befehle; dann OFFEN.
+- Weder SMART noch eine echte Dump-Inhaltsanalyse werden hier ausgefuehrt.
+- BSOD-Ursachen duerfen nicht automatisch aus Event 41 oder Treiberlisten abgeleitet werden.
+- DiskPart list/detail sind nur lesend; DISM wird ausschliesslich mit Get-Optionen genutzt.
+- Bei Verdacht auf Datentraegerschaden zuerst Daten sichern, nicht stressen.
+- Dieses Paket ist nicht auf realem WinPE ausgefuehrt worden. Test zuerst auf Testhardware.

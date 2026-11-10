@@ -1,0 +1,31 @@
+NOLS IT TOOLKIT v1.8.1 - EFI-VOLUME-AUSWAHL
+===============================================================
+
+Bootdiagnose / UEFI-Reparatur:
+1. Mit DiskPart 'list disk' und 'list volume' die Zielpartition prfen.
+2. Die VOLUME-NUMMER eingeben, nicht den Laufwerksbuchstaben.
+3. Die Details prfen: interne GPT-EFI-Systempartition (ESP), FAT32,
+   richtiger Datentr„ger zum gew„hlten Windows, nicht Ventoy/VTOYEFI.
+4. Ist kein Buchstabe zugewiesen, kann das Toolkit nach Y einen freien
+   Buchstaben tempor„r zuordnen. Dies ver„ndert die Mount-Zuordnung.
+5. Danach wird der Pfad \\EFI\\Microsoft\\Boot\\BCD bzw. das EFI-
+   Verzeichnis kontrolliert. Nach dem Vorgang wird die eigene
+   tempor„re Laufwerkszuordnung wieder entfernt.
+
+WICHTIG:
+- Eine FAT32-Partition ist nicht automatisch eine ESP.
+- Windows-Volume und EFI-Volume k”nnen unterschiedliche Nummern haben.
+- EFI-Auswahl nur nach manueller Sichtprfung der Disk-/Partitionsdetails.
+- Beim BCDBoot gibt es weiter eine eigene Y/N-Sicherheitsabfrage.
+- Die Bootdiagnose schreibt keine Bootdateien. Ein Mounten kann jedoch
+  den Laufwerksbuchstabenstatus fr die laufende WinPE-Sitzung „ndern.
+- Fehlt die BCD in einem vorhandenen EFI-Verzeichnis, zeigt die Diagnose
+  einen Fehler. Die Reparatur darf eine neue BCD nur mit Best„tigung anlegen.
+- Bei mehr als einem Betriebssystem/mehreren internen Datentr„gern zuerst
+  einen verl„sslichen Bootplan erstellen; kein blindes BCDBoot.
+- Boot-Tools niemals auf die Samsung T9 oder ihre VTOYEFI anwenden.
+
+WinPE: Firmwaremodus per 'wpeutil UpdateBootInfo' und 'reg query'
+prfen; findstr ist dafr nicht notwendig.
+
+Legacy-BIOS-/MBR-Reparatur ist nicht enthalten. Keine Formatierung.

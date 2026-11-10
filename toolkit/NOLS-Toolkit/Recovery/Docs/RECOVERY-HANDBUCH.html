@@ -1,0 +1,24 @@
+<!doctype html>
+<html lang="de"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>NOLS IT Toolkit | Recovery-Handbuch</title>
+<style>
+:root{color-scheme:dark;font-family:Segoe UI,Arial,sans-serif}body{margin:0;background:#070e1b;color:#dbe8fb;line-height:1.65}.wrap{max-width:1040px;margin:auto;padding:30px 22px}h1{color:#32d8ef;font-size:2.5rem;margin-bottom:0}h2{color:#76e8f6;border-bottom:1px solid #314b66;padding-bottom:7px;margin-top:38px}.sub{color:#96afc9;margin-top:4px}.card{background:#102237;border:1px solid #28465e;padding:20px 24px;border-radius:12px;margin:15px 0}.warn{border-color:#ffad4d;background:#2b221d}.danger{border-color:#ff5969}code,pre{font-family:Cascadia Code,Consolas,monospace;background:#071827;color:#8feeff;padding:3px 7px;border-radius:4px}pre{padding:14px;overflow:auto}table{border-collapse:collapse;width:100%}td,th{border-bottom:1px solid #28465e;padding:11px;text-align:left}th{color:#67def8}a{color:#64d7ff}small{color:#9db2c9}
+</style></head><body><main class="wrap">
+<h1>NOLS / IT TOOLKIT</h1><p class="sub">RECOVERY EDITION 1.2 · Offline-Handbuch · Windows PE / Windows RE</p>
+<div class="card warn"><strong>Diagnose zuerst.</strong> Kein automatisches Reparieren, Formatieren oder Überschreiben von Bootdateien. Wenn Datenverlust droht: Datenträgerzustand klären und möglichst ein Image erstellen.</div>
+<h2>1. Aus Windows Setup starten</h2>
+<p>In einer passenden Windows-Setup-Umgebung mit <strong>Umschalt + F10</strong> die CMD öffnen (falls verfügbar). Laufwerksbuchstaben ermitteln:</p><pre>diskpart
+list volume
+exit</pre>
+<p>Volumen mit dem Label <code>Ventoy</code> erkennen. Wenn es hier <code>D:</code> ist:</p><pre>D:\NOLS-Toolkit\START-RECOVERY.cmd</pre>
+<p>Die Laufwerksbuchstaben von Windows und vom USB-Datenträger können sich von einem normal gestarteten Windows unterscheiden.</p>
+<h2>2. Diagnosemenü</h2><table><tr><th>Menü</th><th>Funktion</th><th>Wirkung</th></tr><tr><td>1</td><td>DiskPart list disk / list volume</td><td>Nur Anzeige</td></tr><tr><td>2</td><td>Windows-Installationen finden</td><td>Prüft typische Windows-Dateien</td></tr><tr><td>3</td><td>CHKDSK &lt;Laufwerk&gt;:</td><td>Ohne /f /r /x</td></tr><tr><td>4</td><td>DISM Offline /CheckHealth</td><td>Keine Image-Reparatur</td></tr><tr><td>5</td><td>IP-Konfiguration und Routen</td><td>Nur Anzeige</td></tr><tr><td>6</td><td>BCDEdit /enum all</td><td>Aktiver BCD-Store; kann zu WinPE gehören</td></tr><tr><td>7</td><td>Reparatur-Fahrplan</td><td>Nur Hinweise</td></tr></table>
+<h2>3. Zielsystem vor jeder Reparatur ermitteln</h2>
+<div class="card"><strong>Prüfliste:</strong> Ist die Windows-Partition sichtbar und entsperrt? Handelt es sich wirklich um die gesuchte Installation? Sind UEFI/GPT beziehungsweise BIOS/MBR korrekt zugeordnet? Ist die EFI-Partition identifiziert? Ist das Laufwerk mechanisch/elektronisch gesund? Gibt es eine aktuelle Sicherung?</div>
+<h2>4. Spätere Reparaturmodule</h2>
+<div class="card"><strong>Phase A:</strong> Gezielte SFC-/DISM-Prüfung mit Offline-Windows- und Bootpfad. <br><strong>Phase B:</strong> Reparatur mit /scannow oder /RestoreHealth erst nach Bestätigung und kompatibler Quelle.<br><strong>Phase C:</strong> CHKDSK mit Reparaturparametern nur nach Backup und SMART-/Hardwarebewertung.<br><strong>Phase D:</strong> Bootloader-Reparatur mit BCDBoot nach Sicherung des BCD und eindeutiger Zuordnung von Windows/EFI/Firmwaremodus.</div>
+<div class="card danger"><strong>Achtung:</strong> <code>DISM /Online</code> aus WinPE würde die gerade laufende PE-Umgebung ansprechen, nicht automatisch das kaputte Offline-Windows. <code>bcdedit /enum all</code> kann ebenfalls nur die gestartete Umgebung zeigen. Nie ohne Zielprüfung Änderungen durchführen.</div>
+<h2>5. Microsoft-Dokumentation</h2>
+<p><a href="https://learn.microsoft.com/windows-server/administration/windows-commands/chkdsk">CHKDSK</a> · <a href="https://learn.microsoft.com/windows-server/administration/windows-commands/sfc">SFC</a> · <a href="https://learn.microsoft.com/windows-hardware/manufacture/desktop/repair-a-windows-image">DISM</a> · <a href="https://learn.microsoft.com/windows-hardware/manufacture/desktop/bcdboot-command-line-options-techref-di">BCDBoot</a></p>
+<p><small>Dieses Handbuch funktioniert im normalen Browser offline. In einer Standard-WinPE- oder WinRE-CMD ist meist kein Browser verfügbar; deshalb gibt es parallel den CMD-Recovery-Launcher.</small></p>
+</main></body></html>

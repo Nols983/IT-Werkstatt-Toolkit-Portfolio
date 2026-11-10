@@ -1,0 +1,43 @@
+NOLS IT TOOLKIT v2.0 - FEHLERANALYSE
+====================================
+
+Der Name "Fehleranalyse" ersetzt den geplanten Begriff "Problemassistent".
+Das Modul ist ein WinPE-/WinRE-CMD-Werkzeug ohne PowerShell oder Browser.
+
+Start: Hauptmenue -> [A] FEHLERANALYSE
+- Fehlerbild aus sieben Kategorien waehlen.
+- Windows-Laufwerk EINMAL waehlen, ueber die bestehende Volume-Auswahl.
+- Optionale Toolkit-Logs: Y oder N (Standard N).
+- Schnellpruefung: Winload, SYSTEM-Hive und BCD-Vorlage.
+- Bei Bluescreen: Vorhandensein und Namen von Minidumps/MEMORY.DMP.
+- Weitere Pruefungen koennen vom Untermenue gezielt gestartet werden:
+  * Offline System.evtx per wevtutil, falls in WinPE vorhanden.
+  * CHKDSK ohne /f, DISM /CheckHealth, SFC /verifyonly.
+  * WindowsUpdateClient-Operational.evtx und optionale Paketliste.
+  * ipconfig der AKTUELLEN WinPE-Sitzung.
+- Empfehlungen nur als Hinweise, nicht als automatische Fehlerursache.
+
+SICHERHEIT
+- Es gibt KEINE automatischen Reparaturen, keine BCD-Schreibvorgaenge,
+  keine erzwungene SFC-/DISM-Reparatur und keine Partitionsaenderung.
+- Diagnoseprogramme koennen selber temporäre Dateien/Windows-Logs
+  schreiben. Bei physischem Laufwerksdefekt vor Scans Daten sichern.
+- Minidumps und Ereignisse sind keine ausreichende Ursachendiagnose.
+- Eine fehlende Datei beweist allein noch keinen Defekt.
+- Keine Offline-Registry-Hives werden geladen oder veraendert.
+- Logs auf T9 nur wenn Y ausgewaehlt wurde, je Fall in einem Ordner
+  Recovery/Logs/FEHLERANALYSE_<zufall>.
+- Windows-Werkzeuge koennen ungeachtet dieser Auswahl eigene Logs erzeugen.
+- BitLocker muss vor Offline-Zugriff ggf. entsperrt werden.
+
+WICHTIG
+- Der Zielbuchstabe ist NUR fuer diese Fehleranalyse einmalig ausgewaehlt.
+  Bestehende externe Reparaturmenues verlangen ihre eigene Zielpruefung.
+- Der BOOT-WERKZEUGE-Bereich bleibt getrennt und hat BCD-Sicherung.
+- Offline-Eventauswertung mit wevtutil funktioniert nur, wenn das
+  Werkzeug in der verwendeten WinPE-Version vorhanden ist.
+- Update-/Treiberdiagnose kann den laufenden Windows-Desktop benoetigen.
+
+TESTSTATUS
+- Installer, Archiv-Integritaet, Referenzen und Codeformat statisch geprueft.
+- Vollstaendiger WinPE-Praxistest noch ausstehend.

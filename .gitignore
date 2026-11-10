@@ -1,0 +1,35 @@
+# Never commit Microsoft WinPE images, customer traces, private credentials,
+# generated archives, or third-party program bundles.
+*.iso
+*.img
+*.wim
+*.esd
+*.vhd
+*.vhdx
+*.dmp
+*.evtx
+*.log
+*.pfx
+*.p12
+*.pem
+*.key
+*.crt
+*.zip
+*.7z
+*.bak
+*.bak-*
+*.sha256
+.env
+.env.*
+__pycache__/
+.pytest_cache/
+.venv/
+**/Logs/
+**/Backups/
+**/Scratch/
+**/EventXML/
+**/Tools/
+releases/
+build/
+dist/
+.DS_Store

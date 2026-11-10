@@ -1,0 +1,38 @@
+NOLS IT TOOLKIT v2.1.1 - XML-Ereignisauswertung
+================================================
+
+Hotfix fuer die vorhandene Version 2.1.
+
+Problem v2.1:
+  wevtutil /f:text lieferte Nullbytes in lokalisierten Event-Feldern.
+  Der Windows-CMD-Parser (for /f) zaehlte deshalb nur das erste Event.
+
+Fix:
+  - wevtutil filtert per XPath nach Provider UND Ereignis-ID.
+  - /f:xml /uni:false /e:Events erzeugt einbyteiges XML.
+  - Die Batch-Auswertung zaehlt ausschliesslich Event-Starttags
+    (<Event xmlns=...), nicht Event-Beschreibungen oder Payload.
+  - Keine Abhaengigkeit von PowerShell, findstr oder find.
+  - Abfragen bis zu 80 Systemereignisse je Quelle und 100 Update-
+    Ereignisse je Quelle. Limit-Erreichung wird als MINDESTENS
+    ausgewiesen, nicht als exakter Gesamtwert.
+  - Hyper-V-Hypervisor/ID41 und WindowsUpdateClient/ID41 werden
+    getrennt von Kernel-Power/ID41 erfasst.
+  - Bei Fehlern nicht scheinbar 0, sondern OFFEN.
+
+Protokolle:
+  Y -> 95_Analysebericht.txt und EventXML/*.xml im schon
+       existierenden FEHLERANALYSE_*-Ordner.
+  N -> temporaere Analyse im WinPE-TEMP-Ordner, anschliessend
+       Entfernung. Keine neuen dauerhaften Toolkit-Logs.
+  Vorhandene Protokolle aus anderen Tests bleiben bestehen.
+
+Technische Grenzen:
+  - WindowsRE-/WinPE-Laufzeit wurde nicht in dieser Umgebung
+    ausgefuehrt; bitte mit echten Windows-11-PE-Daten testen.
+  - Kein Beweis fuer eine Fehlerursache oder Hardwaredefekt.
+  - Es wird NICHT auf der Offline-Windows-Partition repariert.
+  - Falls eine XML-Ausgabe leer/unerwartet ist, sollte die Query
+    im Rohprotokoll EventXML/<Name>.err.txt kontrolliert werden.
+  - Bootreparatur, DISM, SFC, CHKDSK, Menue und Windows-Launcher
+    bleiben bytegenau unveraendert.

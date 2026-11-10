@@ -1,0 +1,46 @@
+NOLS v2.4.1 - QUALITAETSUPDATE ZUR DATENTRAEGER-/TREIBERANALYSE
+================================================================
+
+UNTER WINDOWS PE
+- Die Speicheranalyse prueft zusaetzlich getrennt, ob NTFS 55 und 140 in
+  Offline-System.evtx vorkommen. Ein Treffer bedeutet PRUEFHINWEIS,
+  nicht automatisch, dass C: aktuell beschaedigt ist.
+- NTFS 98 ist haeufig ein Informationsereignis. Die bisherige
+  Sammelzeile NTFS-Ereignisse ist KEINE Liste von NTFS-Fehlern.
+- BSOD / TREIBER: SCM 7000, 7023, 7031 und 7034 werden zusaetzlich
+  einzeln auf Vorkommen abgefragt. Dienstereignis ist kein Beweis
+  fuer einen Bluescreen oder einen schuldigen Treiber.
+- Y = mindestens ein Treffer, N = in Stichprobe nicht vorhanden,
+  ? = nicht auswertbar. Vorhandene Ereignisdateien sind Quelle.
+- Keine Treiber oder Datentraeger werden geaendert.
+
+UNTER LINUX / BAZZITE - NACHBEARBEITUNG GESPEICHERTER LOGS
+Die Befehle im Stammverzeichnis der Ventoy-Datenpartition ausfuehren.
+  python3 NOLS-Toolkit/Recovery/Analyse/offline_analyse.py \
+      "/PFAD/ZUM/SPEICHER_ORDNER" --mode storage
+
+  python3 NOLS-Toolkit/Recovery/Analyse/offline_analyse.py \
+      "/PFAD/ZUM/BSOD_TREIBER_ORDNER" --mode bsod
+
+- Automatische XML-Codierung: UTF-8, danach Windows-1252.
+- Falls Quelle erkennbar OEM/CP850 ist, kann --xml-encoding cp850
+  manuell angegeben werden.
+- Ergebnis: 98_Speicher_Korrelation.txt bzw. 98_BSOD_Auswertung.txt.
+- NTFS ID 55/140 gesondert; ID 98 Level 4 (State 0) als INFO.
+- Bei ID 55 auf \Device\HarddiskVolumeShadowCopy... wird die
+  Schattenkopie ausgewiesen, nicht pauschal das aktuelle Systemvolume.
+- Dienstnamen und Fehler-ID werden aus EventData/param1 ausgelesen,
+  mit Anzahl und neuestem Zeitstempel in UTC.
+- 5-Minuten-Korrelation nutzt NTFS-98-Informationen NICHT als
+  Hinweis auf Storage-Schaden.
+- Nur die durch WinPE exportierte begrenzte Ereignisstichprobe wird
+  ausgewertet. 0 Treffer beweist NICHT, dass keine Fehler existieren.
+
+NICHT ENTHALTEN
+- WinDbg/CDB Dumpanalyse, keine konkrete .sys-Absturz-Zuordnung.
+- Kein Treiber-Rollback, keine Reparatur, keine Ereignisloeschung.
+
+STATUS
+- Linux-Analyse mit realen XMLs und simulierten Eingaben getestet.
+- Neue Batch-Abfragen statisch geprueft, NICHT auf echtem WinPE getestet.
+- Weitere Praxistests erst bei geeignetem Kundenfall notwendig.

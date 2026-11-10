@@ -1,0 +1,597 @@
+{
+  "version": 1,
+  "title": "IT-WERKSTATT TOOLKIT",
+  "categories": [
+    {
+      "id": "Alle",
+      "label": "ALLE WERKZEUGE",
+      "desc": "Alles auf einen Blick"
+    },
+    {
+      "id": "Datentraeger",
+      "label": "DATENTRÄGER",
+      "desc": "SMART und Laufwerke"
+    },
+    {
+      "id": "Windows",
+      "label": "SYSTEM & WINDOWS",
+      "desc": "Prozesse, Autostart und Dateien"
+    },
+    {
+      "id": "Netzwerk",
+      "label": "NETZWERK",
+      "desc": "Hosts, Verbindungen und Pakete"
+    },
+    {
+      "id": "Backup",
+      "label": "BACKUP & RECOVERY",
+      "desc": "Images, VHDX, Sicherungen"
+    },
+    {
+      "id": "Skripte",
+      "label": "POWERSHELL",
+      "desc": "Diagnose und Testläufe"
+    },
+    {
+      "id": "Wartung",
+      "label": "WARTUNG",
+      "desc": "Installer und Sicherheitssoftware"
+    },
+    {
+      "id": "Erweitert",
+      "label": "ERWEITERT (VORSICHT)",
+      "desc": "Werkzeuge mit erhöhtem Risiko"
+    },
+    {
+      "id": "Dokumentation",
+      "label": "DOKUMENTATION",
+      "desc": "Anleitungen und Verzeichnisse"
+    },
+    {
+      "id": "NurVorhanden",
+      "label": "NUR VORHANDENE",
+      "desc": "Fehlende Dateien ausblenden"
+    }
+  ],
+  "items": [
+    {
+      "id": "cdi",
+      "name": "CrystalDiskInfo (64-Bit)",
+      "category": "Datentraeger",
+      "mode": "exe",
+      "path": "Tools/Windows/Datentraeger/CrystalDiskInfo/DiskInfo64.exe",
+      "description": "SMART-Werte, Temperaturen, Zustand und Betriebsstunden von HDDs und SSDs anzeigen.",
+      "usage": "Erster Check bei vermeintlich defekten Laufwerken.",
+      "risk": "normal",
+      "admin": "Optional",
+      "note": "Werte bei USB-Gehäusen können unvollständig sein.",
+      "tags": [
+        "SMART",
+        "SSD",
+        "HDD",
+        "Temperatur"
+      ]
+    },
+    {
+      "id": "everything",
+      "name": "Everything",
+      "category": "Windows",
+      "mode": "exe",
+      "path": "Tools/Windows/Systemanalyse/Everything/everything.exe",
+      "description": "Extrem schnelle Suche nach Dateien und Ordnern auf Windows-Laufwerken.",
+      "usage": "Dateien und Pfade finden.",
+      "risk": "normal",
+      "admin": "Optional",
+      "note": "Indizierung von NTFS-Laufwerken benötigt je nach Modus erhöhte Rechte.",
+      "tags": [
+        "Dateisuche",
+        "NTFS"
+      ]
+    },
+    {
+      "id": "procexp",
+      "name": "Process Explorer",
+      "category": "Windows",
+      "mode": "exe",
+      "path": "Tools/Windows/Systemanalyse/Sysinternals/procexp64.exe",
+      "description": "Erweiterte Prozessübersicht mit geladenen DLLs, Handles und Prozessbäumen.",
+      "usage": "Hängende Prozesse, Ressourcenverbrauch und unbekannte Prozesse prüfen.",
+      "risk": "normal",
+      "admin": "Optional",
+      "note": "Für Systemprozesse können erhöhte Rechte nötig sein.",
+      "tags": [
+        "Prozesse",
+        "Taskmanager",
+        "CPU",
+        "RAM"
+      ]
+    },
+    {
+      "id": "autoruns",
+      "name": "Autoruns",
+      "category": "Windows",
+      "mode": "exe",
+      "path": "Tools/Windows/Systemanalyse/Sysinternals/Autoruns64.exe",
+      "description": "Zeigt Autostarts, Dienste, Treiber, Explorer-Erweiterungen und geplante Tasks.",
+      "usage": "Unerwünschte Autostarts oder persistente Software untersuchen.",
+      "risk": "caution",
+      "admin": "Optional",
+      "note": "Änderungen an Einträgen können Windows-Funktionen beeinträchtigen. Erst analysieren.",
+      "tags": [
+        "Autostart",
+        "Dienste",
+        "Persistenz"
+      ]
+    },
+    {
+      "id": "procmon",
+      "name": "Process Monitor",
+      "category": "Windows",
+      "mode": "exe",
+      "path": "Tools/Windows/Systemanalyse/Sysinternals/Procmon64.exe",
+      "description": "Zeichnet Datei-, Registry-, Prozess- und Threadaktivität detailliert auf.",
+      "usage": "Zugriff verweigert, fehlende Dateien oder Prozessfehler untersuchen.",
+      "risk": "normal",
+      "admin": "Ja/oft",
+      "note": "Aufzeichnungen können umfangreich werden und sensible Pfade enthalten.",
+      "tags": [
+        "Registry",
+        "Datei",
+        "Fehler"
+      ]
+    },
+    {
+      "id": "rammap",
+      "name": "RAMMap",
+      "category": "Windows",
+      "mode": "exe",
+      "path": "Tools/Windows/Systemanalyse/Sysinternals/RAMMap64.exe",
+      "description": "Analysiert die physische Speicherbelegung von Windows.",
+      "usage": "Ungewöhnliche RAM-Auslastung oder Datei-Cache prüfen.",
+      "risk": "normal",
+      "admin": "Ja/oft",
+      "note": "",
+      "tags": [
+        "RAM",
+        "Arbeitsspeicher"
+      ]
+    },
+    {
+      "id": "sigcheck",
+      "name": "Sigcheck",
+      "category": "Windows",
+      "mode": "cli",
+      "path": "Tools/Windows/Systemanalyse/Sysinternals/sigcheck64.exe",
+      "description": "Prüft digitale Signaturen und Dateiversionsinformationen per Kommandozeile.",
+      "usage": "Verdächtige oder unbekannte EXE-Dateien untersuchen.",
+      "risk": "normal",
+      "admin": "Optional",
+      "note": "Übertragung an Online-Dienste nur, wenn ausdrücklich aktiviert und erlaubt.",
+      "tags": [
+        "Signatur",
+        "Hash",
+        "EXE"
+      ]
+    },
+    {
+      "id": "psinfo",
+      "name": "PsInfo",
+      "category": "Windows",
+      "mode": "cli",
+      "path": "Tools/Windows/Systemanalyse/Sysinternals/PsInfo64.exe",
+      "description": "Liest technische Windows-Systemdaten über die Konsole aus.",
+      "usage": "Schnelle Systemübersicht vor einer Reparatur.",
+      "risk": "normal",
+      "admin": "Optional",
+      "note": "",
+      "tags": [
+        "Systeminfo"
+      ]
+    },
+    {
+      "id": "handle",
+      "name": "Handle",
+      "category": "Windows",
+      "mode": "cli",
+      "path": "Tools/Windows/Systemanalyse/Sysinternals/handle64.exe",
+      "description": "Findet offene Dateihandles und Prozesse, die Dateien blockieren.",
+      "usage": "Warum lässt sich eine Datei nicht verschieben oder löschen?",
+      "risk": "normal",
+      "admin": "Ja/oft",
+      "note": "",
+      "tags": [
+        "Dateisperre"
+      ]
+    },
+    {
+      "id": "tcpview",
+      "name": "TCPView",
+      "category": "Netzwerk",
+      "mode": "exe",
+      "path": "Tools/Windows/Systemanalyse/Sysinternals/tcpview64.exe",
+      "description": "Live-Übersicht aktiver TCP-/UDP-Verbindungen mit zugehörigen Prozessen.",
+      "usage": "Unbekannte Verbindungen oder Ports einem Programm zuordnen.",
+      "risk": "normal",
+      "admin": "Optional",
+      "note": "",
+      "tags": [
+        "Ports",
+        "Verbindung",
+        "TCP"
+      ]
+    },
+    {
+      "id": "psping",
+      "name": "PsPing",
+      "category": "Netzwerk",
+      "mode": "cli",
+      "path": "Tools/Windows/Systemanalyse/Sysinternals/psping64.exe",
+      "description": "Misst Erreichbarkeit, Latenz und bei geeigneten Tests Netzwerkleistung per CLI.",
+      "usage": "Port-Erreichbarkeit und Verbindungsprobleme analysieren.",
+      "risk": "normal",
+      "admin": "Optional",
+      "note": "",
+      "tags": [
+        "Ping",
+        "Latency",
+        "TCP"
+      ]
+    },
+    {
+      "id": "aips",
+      "name": "Advanced IP Scanner",
+      "category": "Netzwerk",
+      "mode": "installer",
+      "path": "Tools/Windows/Netzwerk/Advanced_IP_Scanner/Advanced_IP_Scanner_2.5.4594.1.exe",
+      "description": "Durchsucht das lokale Netzwerk nach erreichbaren Hosts und zeigt IP-, MAC- und Gerätenamen.",
+      "usage": "Netzwerkdrucker und Clients schnell finden.",
+      "risk": "caution",
+      "admin": "Optional",
+      "note": "Beim ersten Start ausdrücklich den portablen Modus wählen; Scanner nur in autorisierten Netzen nutzen.",
+      "tags": [
+        "IP Scan",
+        "LAN",
+        "Drucker"
+      ]
+    },
+    {
+      "id": "wire",
+      "name": "Wireshark PortableApps – Paket",
+      "category": "Netzwerk",
+      "mode": "installer",
+      "path": "Tools/Windows/Netzwerk/Wireshark/WiresharkPortable64_4.6.9.paf.exe",
+      "description": "PortableApps-Installationspaket für den Netzwerkanalysator Wireshark.",
+      "usage": "Erst auf die T9 einrichten, danach vorhandene Mitschnitte lesen.",
+      "risk": "caution",
+      "admin": "Optional",
+      "note": "NOCH KEINE fertige WiresharkPortable.exe. Im Paketdialog als Ziel die T9 wählen. Für Live-Capture wird meist Npcap auf dem Ziel-PC benötigt.",
+      "tags": [
+        "PCAP",
+        "Packet",
+        "DNS",
+        "DHCP"
+      ]
+    },
+    {
+      "id": "disk2vhd",
+      "name": "Disk2vhd",
+      "category": "Backup",
+      "mode": "exe",
+      "path": "Tools/Windows/Systemanalyse/Sysinternals/disk2vhd64.exe",
+      "description": "Erstellt VHD/VHDX-Images aus laufenden Windows-Datenträgern.",
+      "usage": "System vor Migration oder Analyse als VHDX sichern.",
+      "risk": "caution",
+      "admin": "Optional",
+      "note": "Benötigt ausreichend freien Ziel-Speicher; nicht mit konsistenter Applikationssicherung verwechseln.",
+      "tags": [
+        "VHD",
+        "VHDX",
+        "Imaging"
+      ]
+    },
+    {
+      "id": "acronis",
+      "name": "Acronis True Image – Installer",
+      "category": "Backup",
+      "mode": "installer",
+      "path": "Tools/Windows/Backup_Recovery/AcronisTrueImage_42980.exe",
+      "description": "Vorhandener Acronis-Installer, nicht die Boot-ISO.",
+      "usage": "Bei lizenzierter Acronis-Nutzung installieren.",
+      "risk": "caution",
+      "admin": "Ja/oft",
+      "note": "Lizenz für beruflichen Einsatz beachten. Boot-ISOs liegen separat in /ISO.",
+      "tags": [
+        "Backup",
+        "Image"
+      ]
+    },
+    {
+      "id": "keyfinder",
+      "name": "Keyfinder",
+      "category": "Windows",
+      "mode": "exe",
+      "path": "Tools/Windows/Lizenz_Diagnose/Keyfinder/keyfinder.exe",
+      "description": "Liest lokal verfügbare Produktschlüssel und Lizenzhinweise aus.",
+      "usage": "Lizenzbestand mit Zustimmung des Gerätebesitzers prüfen.",
+      "risk": "caution",
+      "admin": "Optional",
+      "note": "Ergebnisse können sensible Lizenzdaten enthalten; nicht unverschlüsselt ablegen.",
+      "tags": [
+        "Key",
+        "Lizenz"
+      ]
+    },
+    {
+      "id": "revoun",
+      "name": "Revo Uninstaller – Installer",
+      "category": "Wartung",
+      "mode": "installer",
+      "path": "Tools/Windows/Wartung/Revo_Uninstaller/revosetup.exe",
+      "description": "Installationspaket zur erweiterten Deinstallation von Windows-Software.",
+      "usage": "Probleme beim regulären Deinstallieren bearbeiten.",
+      "risk": "caution",
+      "admin": "Ja/oft",
+      "note": "Keine bereits portable Version; Installation und Lizenzbedingungen prüfen.",
+      "tags": [
+        "Deinstallation",
+        "Programme"
+      ]
+    },
+    {
+      "id": "eset",
+      "name": "ESET NOD32 – Online-Installer",
+      "category": "Wartung",
+      "mode": "installer",
+      "path": "Tools/Windows/Sicherheit/ESET/eset_nod32_antivirus_live_installer.exe",
+      "description": "Live-Installer für ESET; erfordert in der Regel Netzwerkzugang und Lizenz.",
+      "usage": "Nur bei berechtigtem Einsatz auf dem Kundengerät.",
+      "risk": "caution",
+      "admin": "Ja/oft",
+      "note": "Kein fertiger Offline-Virenscanner und kein bootfähiges Rescue-Image.",
+      "tags": [
+        "Antivirus",
+        "Security"
+      ]
+    },
+    {
+      "id": "clipboard",
+      "name": "Zwischenablage-Test",
+      "category": "Skripte",
+      "mode": "ps1",
+      "path": "Tools/Skripte/01_Diagnose/Clipboard-Test.ps1",
+      "description": "Testet die Windows-Zwischenablage in zehn begrenzten Durchläufen und schreibt ein Protokoll.",
+      "usage": "Schwankende Copy/Paste-Fehler nachvollziehen.",
+      "risk": "caution",
+      "admin": "Nein",
+      "note": "WICHTIG: Der Test überschreibt bei jedem Durchlauf die aktuelle Zwischenablage.",
+      "tags": [
+        "PowerShell",
+        "Clipboard"
+      ]
+    },
+    {
+      "id": "edge",
+      "name": "Edge-Konto-Diagnose",
+      "category": "Skripte",
+      "mode": "ps1_email",
+      "path": "Tools/Skripte/01_Diagnose/Edge-Konto-Diagnose.ps1",
+      "description": "Nur lesende Suche nach Kontospuren und Richtlinien in Edge/Windows.",
+      "usage": "Unerwartete Microsoft-Kontovorschläge und Anmeldespuren analysieren.",
+      "risk": "normal",
+      "admin": "Optional",
+      "note": "Vor dem Start wird die zu prüfende E-Mail abgefragt. Der Report kann sensible Metadaten enthalten.",
+      "tags": [
+        "PowerShell",
+        "Edge",
+        "Identity"
+      ]
+    },
+    {
+      "id": "bginfo",
+      "name": "BGInfo",
+      "category": "Windows",
+      "mode": "exe",
+      "path": "Tools/Windows/Systemanalyse/Sysinternals/Bginfo64.exe",
+      "description": "Zeigt technische Systemdaten als Desktop-Hintergrundinformationen an.",
+      "usage": "Geräte- und Supportdaten auf Testsystemen anzeigen.",
+      "risk": "caution",
+      "admin": "Nein",
+      "note": "Ändert nach Konfiguration das Desktop-Hintergrundbild.",
+      "tags": [
+        "Desktop",
+        "System"
+      ]
+    },
+    {
+      "id": "rdcman",
+      "name": "Remote Desktop Connection Manager",
+      "category": "Netzwerk",
+      "mode": "exe",
+      "path": "Tools/Windows/Systemanalyse/Sysinternals/RDCMan.exe",
+      "description": "Verwaltet mehrere Windows-RDP-Verbindungen übersichtlich.",
+      "usage": "Mehrere autorisierte Systeme per RDP administrieren.",
+      "risk": "normal",
+      "admin": "Nein",
+      "note": "Verbindungen und Anmeldedaten mit der nötigen Sorgfalt behandeln.",
+      "tags": [
+        "RDP",
+        "Remote"
+      ]
+    },
+    {
+      "id": "procdump",
+      "name": "ProcDump",
+      "category": "Windows",
+      "mode": "cli",
+      "path": "Tools/Windows/Systemanalyse/Sysinternals/procdump64.exe",
+      "description": "Erstellt Prozess-Dumps für tiefergehende Fehlerdiagnose.",
+      "usage": "Hängende oder abstürzende Anwendungen analysieren.",
+      "risk": "caution",
+      "admin": "Optional",
+      "note": "Dump-Dateien können Passwörter und andere sensible Prozessdaten enthalten.",
+      "tags": [
+        "Dump",
+        "Crash"
+      ]
+    },
+    {
+      "id": "regjump",
+      "name": "RegJump",
+      "category": "Windows",
+      "mode": "cli",
+      "path": "Tools/Windows/Systemanalyse/Sysinternals/regjump.exe",
+      "description": "Öffnet einen Registry-Pfad direkt im Registrierungseditor.",
+      "usage": "Bei gezielten Registry-Prüfungen Zeit sparen.",
+      "risk": "caution",
+      "admin": "Nein",
+      "note": "Änderungen im Registrierungseditor separat mit Bedacht durchführen.",
+      "tags": [
+        "Registry"
+      ]
+    },
+    {
+      "id": "psexec",
+      "name": "PsExec – Fernadministration",
+      "category": "Erweitert",
+      "mode": "cli",
+      "path": "Tools/Windows/Systemanalyse/Sysinternals/PsExec64.exe",
+      "description": "Remote-Ausführung in autorisierten Windows-Umgebungen über CLI.",
+      "usage": "Geplante Administration unter passenden Berechtigungen.",
+      "risk": "danger",
+      "admin": "Ja/oft",
+      "note": "Nur auf eigenen bzw. ausdrücklich freigegebenen Systemen verwenden.",
+      "tags": [
+        "Remote",
+        "Admin"
+      ]
+    },
+    {
+      "id": "sdelete",
+      "name": "SDelete – Sicheres Löschen",
+      "category": "Erweitert",
+      "mode": "cli",
+      "path": "Tools/Windows/Systemanalyse/Sysinternals/sdelete64.exe",
+      "description": "CLI-Werkzeug zum unwiederbringlichen Löschen bestimmter Daten.",
+      "usage": "Gezielte Löschaufgaben mit dokumentierter Freigabe.",
+      "risk": "danger",
+      "admin": "Ja/oft",
+      "note": "NICHT für Routine-Wartung; Daten können dauerhaft verloren gehen.",
+      "tags": [
+        "Loeschen",
+        "Disk"
+      ]
+    },
+    {
+      "id": "notmyfault",
+      "name": "NotMyFault – Crash-Test",
+      "category": "Erweitert",
+      "mode": "exe",
+      "path": "Tools/Windows/Systemanalyse/Sysinternals/notmyfault64.exe",
+      "description": "Testwerkzeug, das absichtlich Systemfehler inklusive Bluescreens auslösen kann.",
+      "usage": "Ausschließlich in einer isolierten Test-VM für Debugging.",
+      "risk": "danger",
+      "admin": "Ja",
+      "note": "NIEMALS auf produktiven oder fremden Kundenrechnern ausführen.",
+      "tags": [
+        "BSOD",
+        "Crash",
+        "Test"
+      ]
+    },
+    {
+      "id": "psshutdown",
+      "name": "PsShutdown",
+      "category": "Erweitert",
+      "mode": "cli",
+      "path": "Tools/Windows/Systemanalyse/Sysinternals/psshutdown64.exe",
+      "description": "CLI-Werkzeug zum lokalen oder entfernten Herunterfahren.",
+      "usage": "Nur bei genehmigten Wartungsfenstern.",
+      "risk": "danger",
+      "admin": "Ja/oft",
+      "note": "Kann entfernte Systeme herunterfahren; CLI wird nur als Ordner geöffnet.",
+      "tags": [
+        "Shutdown"
+      ]
+    },
+    {
+      "id": "cpustress",
+      "name": "CPU Stress",
+      "category": "Erweitert",
+      "mode": "exe",
+      "path": "Tools/Windows/Systemanalyse/Sysinternals/CPUSTRES64.EXE",
+      "description": "Gezielter CPU-Stresstest auf einem Testsystem.",
+      "usage": "Stabilität nach Hardwarearbeiten prüfen.",
+      "risk": "danger",
+      "admin": "Nein",
+      "note": "Hohe thermische Belastung; Temperaturen beobachten und nicht unbeaufsichtigt laufen lassen.",
+      "tags": [
+        "Stress",
+        "CPU"
+      ]
+    },
+    {
+      "id": "docs",
+      "name": "Werkzeug-Dokumentation",
+      "category": "Dokumentation",
+      "mode": "folder",
+      "path": "Dokumentation",
+      "description": "Deine fallbezogenen Anleitungen und Dokumentationen.",
+      "usage": "Frühere Fehlerlösungen nachschlagen.",
+      "risk": "normal",
+      "admin": "Nein",
+      "note": "",
+      "tags": [
+        "Anleitungen"
+      ]
+    },
+    {
+      "id": "isofolder",
+      "name": "Bootfähige ISOs",
+      "category": "Dokumentation",
+      "mode": "folder",
+      "path": "ISO",
+      "description": "Verzeichnis aller 24 Ventoy-Images – Windows, Linux, Rescue und Memtest.",
+      "usage": "Vorhandene Rettungsumgebungen ansehen, nicht aus Windows heraus starten.",
+      "risk": "normal",
+      "admin": "Nein",
+      "note": "Zum Start eines ISO-Images von der T9 über Ventoy booten.",
+      "tags": [
+        "Boot",
+        "ISO",
+        "Ventoy"
+      ]
+    },
+    {
+      "id": "scriptsold",
+      "name": "Skripte: Originale / Archiv",
+      "category": "Dokumentation",
+      "mode": "folder",
+      "path": "Tools/Skripte/90_Originale",
+      "description": "Unveränderte ältere Problemlösungsskripte; nicht automatisch starten.",
+      "usage": "Anwendungsfälle und ursprünglichen Code nachlesen.",
+      "risk": "caution",
+      "admin": "Nein",
+      "note": "Enthält ein stark fallbezogenes Windows-Update-Reparaturskript. Vor Einsatz prüfen.",
+      "tags": [
+        "PowerShell",
+        "Archiv"
+      ]
+    },
+    {
+      "id": "backups",
+      "name": "Clonezilla-Backups (NTFS)",
+      "category": "Backup",
+      "mode": "volume",
+      "path": "BACKUPS",
+      "description": "Öffnet die separate NTFS-Partition BACKUPS, sofern sie in Windows einen Laufwerksbuchstaben hat.",
+      "usage": "Bestehende Clonezilla-Sicherungen ansehen.",
+      "risk": "normal",
+      "admin": "Nein",
+      "note": "Öffnet nur den Explorer; keine Sicherung oder Wiederherstellung wird ausgelöst.",
+      "tags": [
+        "Backup",
+        "NTFS"
+      ]
+    }
+  ]
+}

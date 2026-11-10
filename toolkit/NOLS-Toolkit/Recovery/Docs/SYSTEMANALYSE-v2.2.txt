@@ -1,0 +1,44 @@
+NOLS IT TOOLKIT v2.2 - Systemanalyse und Zeitprüfung
+========================================================
+
+NEU:
+- Startprüfung: Zeigt lokale WinPE-Systemzeit und ggf. Zeitzone an;
+  fragt nach Bestätigung, bietet optionale MANUELLE Korrektur.
+- Keine automatische Zeitsynchronisierung. Eine falsche Uhr wird nur
+  erkannt, wenn du sie mit einer vertrauenswürdigen Uhr vergleichst.
+- Zusätzliche Offline-Systemereignisse:
+  DISKERR = disk 7/11/51/153/157
+  STOR129 = storahci/stornvme/storport/iaStorA/iaStorAC 129
+  NTFSERR = Ntfs 55/98/140
+  WHEA18 = Microsoft-Windows-WHEA-Logger 18
+  WHEA1719 = Microsoft-Windows-WHEA-Logger 17/19
+  SCMFAIL = Service Control Manager 7000/7023/7031/7034
+  KPNP219 = Microsoft-Windows-Kernel-PnP 219
+- 95_Analysebericht.txt: Auswertung dieser Gruppen (je max. 32).
+- 97_Werkstattbericht.txt: kompakte Übersicht, Empfehlungen, Grenzen.
+- Bei Logs=N liegt der Bericht nur kurz im WinPE-Temp-Bereich und wird
+  angezeigt, anschließend entfernt. Keine dauerhafte T9-Protokollierung.
+- Bei Logs=Y bleiben Bericht und Original-XML im Fallordner erhalten.
+
+WICHTIG:
+Ein Windows-Ereignis ist kein Beweis einer Fehlerursache.
+Die Kategorien sind unvollständige Stichproben und absichtlich
+konservativ bewertet. Ereignisse mit gleichen IDs, aber anderen
+Quellen, werden nicht fälschlich gleichgesetzt.
+Keine automatische Reparatur oder Änderung der Windows-Installation.
+Systemzeit und Zeitzone sind die der WinPE-Sitzung; Ereignis-XML
+benutzt UTC-Zeitstempel. Zeitzonen- und Uhrabweichungen beachten.
+
+BEDIENUNG:
+- Start: Zeit prüfen und ggf. korrigieren (nur nach Bestätigung).
+- Hauptmenü [T]: Zeitprüfung jederzeit wiederholen.
+- Hauptmenü [A]: Fehleranalyse; Analyse startet nach Fallauswahl.
+- Fehleranalyse [A]: neu auswerten; [B]: Werkstattbericht anzeigen.
+
+VERSION / UPDATE:
+Vorgänger: NOLS v2.1.2 (Parserfix) auf Recovery/Modules/AnalyseBericht.cmd.
+Die Datei wird nur ersetzt, wenn der SHA-256 exakt stimmt.
+Boot-Reparaturmodule bleiben bytegenau unverändert.
+
+ACHTUNG: Batch-Verhalten wurde nur statisch unter Linux geprüft.
+Ein echter Test unter WindowsPE ist vor Kundeneinsatz erforderlich.

@@ -1,0 +1,54 @@
+NOLS IT TOOLKIT - REPARATUR-FAHRPLAN
+==================================
+Stand: v1.4 - Offline-Tools fuer WinPE / WinRE / Windows-Setup-CMD
+
+0. SICHERHEIT
+- Backup/Image zuerst, besonders vor CHKDSK /f oder bei Hardwarefehlern.
+- Im Setup gelten oft andere Buchstaben als im installierten Windows.
+- Volume-Listen werden vor jeder Zielauswahl automatisch angezeigt.
+- X: ist normalerweise das laufende WinPE und als Ziel gesperrt.
+- Das Volume mit dem NOLS Toolkit (Ventoy) ist als Ziel gesperrt.
+- Weitere USB-/externe Datentraeger koennen nur per Beschreibung erkannt werden.
+- BitLocker-Laufwerke muessen vor dem Zugriff ordnungsgemaess entsperrt sein.
+
+1. DIAGNOSE (jetzt verfuegbar)
+- DiskPart LIST DISK, LIST VOLUME.
+- SFC /verifyonly mit /offbootdir und /offwindir.
+- DISM /Image:X:\ /Cleanup-Image /CheckHealth.
+- DISM /Image:X:\ /Cleanup-Image /ScanHealth mit /ScratchDir.
+- CHKDSK X: ohne /f, /r und /x.
+- Weitere Statuspruefungen: Netzwerk, BCD, Windows-Suche.
+
+2. REPARATUR (jetzt verfuegbar; mit separater Bestaetigung)
+- SFC /scannow /offbootdir=... /offwindir=...
+  Ersetzt ggf. fehlerhafte geschuetzte Windows-Systemdateien.
+  Das Bootverzeichnis muss passen; bei getrennten Bootpartitionen
+  kann eine alternative Zuordnung erforderlich sein.
+- DISM /Image:X:\ /Cleanup-Image /RestoreHealth [/Source:...]
+  Kann eine passende Quelle benoetigen (OS-Build/Edition/Architektur).
+  ISO-Datei direkt auf dem Ventoy-Laufwerk ist noch keine gemountete
+  Reparaturquelle. Ein bereitgestelltes WIM oder Windows-Verzeichnis
+  kann geeignet sein. Bei WIM-Quellen den richtigen Index verwenden.
+  /ScratchDir wird auf der Ventoy-Partition angelegt.
+- CHKDSK X: /f
+  Veraendert Dateisystem-Metadaten und kann bei beschaedigten Medien
+  die Datenrettung erschweren. /r wurde bewusst NICHT eingebaut.
+
+3. SPAETER
+- EFI-Partition und BCD zunaechst sichern und untersuchen.
+- Nur dann EFI/BCD gezielt reparieren; keine automatische Auswahl.
+- Ausfuehrlichere Protokolle / Fehlerauswertung, Wartungsassistent.
+
+4. HINWEISE
+- Fuer DISM muss das verwendete DISM mit dem Ziel-Windows kompatibel sein.
+- DISM-Logs und Scratch-Daten koennen auf Volumes geschrieben werden.
+- Eine laufende CHKDSK-/SFC-/DISM-Reparatur nicht einfach abbrechen.
+- Alle Reparaturen erfolgen ausschliesslich nach manueller Zielwahl
+  und exakter Bestaetigung im jeweiligen Menue.
+- Das Toolkit ist kein Ersatz fuer ein aktuelles Backup.
+
+Offizielle Befehlsreferenzen:
+https://learn.microsoft.com/windows-server/administration/windows-commands/sfc
+https://learn.microsoft.com/windows-server/administration/windows-commands/chkdsk
+https://learn.microsoft.com/windows-hardware/manufacture/desktop/repair-a-windows-image
+https://learn.microsoft.com/windows-hardware/manufacture/desktop/deployment-image-servicing-and-management--dism--best-practices

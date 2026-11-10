@@ -1,0 +1,26 @@
+IT-WERKSTATT TOOLKIT v2.4.2 RC3 - WERKSTATT-LEITFADEN
+======================================================
+Entwicklung: Nols
+
+1. Am Ventoy-Stick das Recovery-ISO aus ISO/ starten.
+2. Windows-Installation und physisches Ziellaufwerk kontrollieren.
+3. Zuerst nur lesende Diagnose / Fehleranalyse ausfuehren.
+4. Bei I/O-/Datentraegerverdacht zuerst Daten sichern.
+5. Reparatur nur nach bewusstem Ziel- und Backup-Check starten.
+6. USB-Schutz: fehlende oder unklare DiskPart-Zuordnung blockiert.
+7. Berichte: Hauptmenue [X], gespeicherten Fallordner auswaehlen.
+8. Hauptmenue: Diagnose 1-5, Reparatur A-C, Weitere W-Z,
+   System 8/9/0. Untermenue-Tasten sind unveraendert.
+9. BSOD: Treiberliste / Dump-Fundstelle beweist keine Ursache;
+   WinDbg/CDB-Dumpinhaltsanalyse ist noch nicht integriert.
+10. [0] im Hauptmenue beendet den Launcher zur WinPE-CMD.
+
+WICHTIG: v2.4.2 RC2 ist KEINE Freigabe fuer Kollegeneinsatz, bevor
+Autostart, alle Menues und USB-Schutz auf Testhardware geprueft sind.
+Die bisher funktionierende ISO v1.0 wurde NICHT veraendert.
+
+DE-Tastatur: per START-RECOVERY.cmd und wpeutil SetKeyboardLayout
+0407:00000407 (nur WinPE/WinRE und wenn verfuegbar).
+
+Tastatur: [W] im Hauptmenue (DE/EN), anschliessend neue CMD.
+ISO bleibt beim Toolkit-Update unveraendert.
