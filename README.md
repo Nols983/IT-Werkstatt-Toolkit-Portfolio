@@ -73,7 +73,7 @@ Für einen lokalen Test werden Windows mit Administratorrechten, das passende Wi
 
 ```bash
 git clone https://github.com/Nols983/IT-Werkstatt-Toolkit-Portfolio.git
-cd IT-Werkstatt-Toolkit
+cd IT-Werkstatt-Toolkit-Portfolio
 ```
 
 ### 2. WinPE-ISO auf Windows erstellen
