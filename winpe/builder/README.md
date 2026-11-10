@@ -7,7 +7,7 @@
 > DISM meldete Fehler 1639. v0.2.4 trennt die beiden Argumente mit
 > zwei benannten Variablen und uebergibt sie als Array. Die uebrigen
 > Buildschritte und WinPE-Startdateien bleiben unveraendert.
-> **Noch nicht unter Windows erprobt:** Schritt 4/7 bis 7/7 mit v0.2.4.
+> **Praxistest abgeschlossen:** v0.2.4 wurde unter Windows mit ADK in allen sieben Build-Schritten erfolgreich ausgefuehrt. Die dabei erzeugte Test-ISO startete ueber Ventoy auf einem Test-PC.
 >
 > Dieses Verzeichnis enthaelt **keine** Windows-Binärdateien und **keine** ISO.
 
@@ -27,7 +27,7 @@ Pfadstruktur `X:\NOLS\` und `NOLS-Toolkit\` bleibt erhalten.
 Entpacke/klone das GitHub-Repository. In einer administrativen CMD:
 
 ```cmd
-cd /d C:\Pfad\zum\IT-Werkstatt-Toolkit\winpe\builder
+cd /d C:\Pfad\zum\IT-Werkstatt-Toolkit-Portfolio\winpe\builder
 BUILD-RECOVERY.cmd --check
 ```
 
@@ -70,7 +70,7 @@ Microsoft-Rechte nicht in einen oeffentlichen GitHub-Release.
 
 ## Fehlerbehebung
 
-Bei Fehler 1639 waehrend der WinPE-WMI-Installation mindestens v0.2.3 nutzen.
+Bei Fehler 1639 waehrend der WinPE-WMI-Installation mindestens v0.2.4 nutzen.
 Die Installation wird jetzt mit `Add-WindowsPackage -Path <Mount> -PackagePath
 <CAB> -NoRestart` ausgefuehrt; das DISM-Modul wird in `--check` getestet.
 Den vorherigen Fehllauf nicht loeschen oder weiterverwenden.

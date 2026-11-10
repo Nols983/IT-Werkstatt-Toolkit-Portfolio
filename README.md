@@ -8,6 +8,15 @@ Das IT-Werkstatt Toolkit ist ein persönliches Praxisprojekt zur Fehlersuche an 
 
 Ich entwickle das Toolkit anhand von Aufgaben aus dem Werkstattalltag. Besonders wichtig sind mir die saubere Trennung von Diagnose und Reparatur, der Schutz angeschlossener Datenträger und die Möglichkeit, auch bei einem nicht mehr startenden Windows zu arbeiten.
 
+## Downloads
+
+Im [Release **v2.4.2-rc3**](https://github.com/Nols983/IT-Werkstatt-Toolkit-Portfolio/releases/tag/v2.4.2-rc3) stehen zwei gebrauchsfertige ZIP-Pakete bereit:
+
+- **`IT-Werkstatt-Toolkit-v2.4.2-RC3.zip`:** Recovery-Menue mit Modulen und Dokumentation. Den enthaltenen Ordner `NOLS-Toolkit` direkt in das Stammverzeichnis der Ventoy-Datenpartition entpacken.
+- **`IT-Werkstatt-WinPE-Builder-v0.2.4.zip`:** WinPE-Builder v0.2.4 mit Startskripten. Damit laesst sich auf einem Windows-PC mit Microsoft ADK und WinPE-Add-on eine eigene Test-ISO erstellen.
+
+**Nicht enthalten:** eine fertige WinPE-ISO, Microsoft-WinPE-Binaerdateien, Drittanbieterprogramme oder Kundendaten. Die Recovery-Funktionen setzen eine geeignete Windows-PE-Umgebung voraus. Dieser Stand ist eine Preview und keine universell getestete Reparaturloesung.
+
 ## Einblick in die Recovery-Umgebung
 
 Die Recovery-Umgebung wird aus dem Microsoft ADK lokal erstellt und über Ventoy gestartet. Das Toolkit liegt unabhängig von der ISO auf dem USB-Datenträger. Dadurch können die Diagnosemodule aktualisiert werden, ohne für jede Änderung eine neue WinPE-ISO bauen zu müssen.
@@ -88,14 +97,13 @@ BUILD-RECOVERY.cmd --build
 
 Der Builder legt einen eigenen Build-Ordner mit Test-ISO und SHA-256-Prüfsumme an. Er überschreibt keine vorhandene Recovery-ISO und beschreibt keinen USB-Datenträger.
 
-<details>
-<summary>Erfolgreicher WinPE-ISO-Build auf einem Windows-Test-PC</summary>
+#### WinPE-Builder im Praxistest
+
+Der folgende Screenshot zeigt den erfolgreichen lokalen ISO-Build mit dem Microsoft ADK. Er ist ein Build-Nachweis, kein Screenshot des WinPE-Desktops.
 
 ![Erfolgreicher WinPE-Build mit Microsoft ADK](docs/screenshots/winpe-builder.png)
 
-*Auszug aus dem lokalen Build-Protokoll. Eine fertige Microsoft-WinPE-ISO wird nicht im Repository bereitgestellt.*
-
-</details>
+*Die ISO wird lokal erzeugt und nicht als Download weitergegeben.*
 
 ### 3. Recovery-Medium vorbereiten
 
